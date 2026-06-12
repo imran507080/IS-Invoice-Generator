@@ -118,6 +118,35 @@ export default function App() {
       
       updated.invoiceNo = formattedNo;
     }
+
+    // Automatically calculate due date based on payment terms net days (e.g. Net 7, Net 30)
+    const oldPaymentTerms = invoiceData.paymentTerms;
+    const newPaymentTerms = updated.paymentTerms;
+    
+    if (oldPaymentTerms !== newPaymentTerms || oldDate !== newDate) {
+      const match = (newPaymentTerms || "").match(/net\s*(\d+)/i);
+      const numberMatch = match ? match : (newPaymentTerms || "").match(/^(\d+)$/);
+      const daysMatch = match || numberMatch;
+
+      if (daysMatch && newDate) {
+        const days = parseInt(daysMatch[1]);
+        if (!isNaN(days)) {
+          const parts = newDate.split('-');
+          const year = parseInt(parts[0]);
+          const month = parseInt(parts[1]) - 1; // 0-based
+          const day = parseInt(parts[2]);
+          
+          const baseDate = new Date(year, month, day);
+          if (!isNaN(baseDate.getTime())) {
+            baseDate.setDate(baseDate.getDate() + days);
+            const yy = baseDate.getFullYear();
+            const mm = String(baseDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(baseDate.getDate()).padStart(2, '0');
+            updated.dueDate = `${yy}-${mm}-${dd}`;
+          }
+        }
+      }
+    }
     
     setInvoiceData(updated);
   };

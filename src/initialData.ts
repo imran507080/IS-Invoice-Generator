@@ -8,10 +8,31 @@ import { InvoiceData } from "./types";
 // A beautiful default base64 SVG logo (a elegant double circle design matching professional logos)
 export const DEFAULT_LOGO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="%232563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 10 4 4 4-4"/></svg>`;
 
+const getTodayDateStr = (): string => {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+};
+
+const getFutureDateStr = (days: number): string => {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+};
+
+const INITIAL_TODAY = getTodayDateStr();
+const INITIAL_DUE = getFutureDateStr(7);
+const INITIAL_INVOICE_NO = `INV-${INITIAL_TODAY.replace(/-/g, "")}-1001`;
+
 export const DEFAULT_INVOICE_DATA: InvoiceData = {
-  invoiceNo: "INV-20260611-1001",
-  date: "2026-06-11",
-  dueDate: "2026-06-18",
+  invoiceNo: INITIAL_INVOICE_NO,
+  date: INITIAL_TODAY,
+  dueDate: INITIAL_DUE,
   paymentTerms: "Net 7",
   
   clientName: "Josh Wings",
@@ -27,7 +48,7 @@ export const DEFAULT_INVOICE_DATA: InvoiceData = {
   
   bankName: "Bank Inc.",
   bankAccountName: "KB Karki",
-  bankAccountNumber: "445566998877",
+  bankAccountNumber: "PK54NBPK0123456789012345",
   bankSwift: "BINKNPKAXXX",
   bankRouting: "123456789",
   

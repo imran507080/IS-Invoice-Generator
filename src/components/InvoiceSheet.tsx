@@ -213,7 +213,7 @@ export default function InvoiceSheet({
                 type="text"
                 value={data.invoiceNo}
                 onChange={(e) => handlePropChange("invoiceNo", e.target.value)}
-                className="text-right text-base text-slate-800 font-bold bg-transparent border-none outline-none font-mono max-w-[120px]"
+                className="text-right text-base text-slate-800 font-bold bg-transparent border-none outline-none font-mono w-48 md:w-56 max-w-[280px]"
                 onFocus={() => onFocusHint("Invoice Name & number", "Specify a unique invoice document sequence code matching your record index (e.g., INV0001).")}
                 onBlur={onBlurHint}
                 placeholder="INV0001"
@@ -348,6 +348,7 @@ export default function InvoiceSheet({
                 <th className="py-2.5 w-20 text-center">Qty</th>
                 <th className="py-2.5 w-28 text-right">Rate</th>
                 <th className="py-2.5 w-32 text-right">Amount</th>
+                <th className="py-2.5 w-10 text-center no-print"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 font-sans">
@@ -433,19 +434,22 @@ export default function InvoiceSheet({
 
                   {/* Sub-Amount */}
                   <td className="py-3 text-right font-semibold text-slate-900 font-mono text-sm">
-                    <div className="flex items-center justify-end gap-1 group relative">
+                    <div className="flex items-center justify-end gap-1">
                       <span>{(item.qty * item.rate).toFixed(2)}</span>
                       <span className="text-[10px] text-slate-400 font-normal">{data.currency}</span>
-                      
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveItem(idx)}
-                        className="absolute -right-3 -top-1 p-1 bg-red-50 hover:bg-red-100 text-red-500 rounded opacity-0 group-hover:opacity-100 transition-all no-print ml-2"
-                        title="Delete line item"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
                     </div>
+                  </td>
+
+                  {/* Actions column */}
+                  <td className="py-3 text-center no-print w-10">
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveItem(idx)}
+                      className="p-1 px-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded transition-all no-print"
+                      title="Delete line item"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -647,15 +651,16 @@ export default function InvoiceSheet({
               )}
 
               {data.visibleSections.acNumber && (
-                <div className="flex justify-between items-center text-[11px] text-slate-500">
+                <div className="flex justify-between items-center text-[11px] text-slate-500 gap-2">
                   <span>IBAN:</span>
                   <input
                     type="text"
                     value={data.bankAccountNumber}
                     onChange={(e) => handlePropChange("bankAccountNumber", e.target.value)}
-                    className="text-right font-mono text-slate-700 bg-transparent border-none outline-none max-w-[150px]"
-                    placeholder="PK54NBPK0123... or A/C No"
-                    onFocus={() => onFocusHint("Bank IBAN / Account Number", "Type international IBAN or general checking account numbers here.")}
+                    className="text-right font-mono text-slate-700 bg-transparent border-none outline-none w-52 md:w-56 max-w-[240px]"
+                    placeholder="PK54 NBPK 0123 4567 8901 2345"
+                    maxLength={34}
+                    onFocus={() => onFocusHint("Bank IBAN / Account Number", "Type your 24-digit international IBAN or general checking account numbers here.")}
                     onBlur={onBlurHint}
                   />
                 </div>
