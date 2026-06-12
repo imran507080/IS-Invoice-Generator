@@ -648,14 +648,14 @@ export default function InvoiceSheet({
 
               {data.visibleSections.acNumber && (
                 <div className="flex justify-between items-center text-[11px] text-slate-500">
-                  <span>A/C No:</span>
+                  <span>IBAN:</span>
                   <input
                     type="text"
                     value={data.bankAccountNumber}
                     onChange={(e) => handlePropChange("bankAccountNumber", e.target.value)}
                     className="text-right font-mono text-slate-700 bg-transparent border-none outline-none max-w-[150px]"
-                    placeholder="445566998877"
-                    onFocus={() => onFocusHint("Bank Account Number", "Type absolute checking or generic IBAN account numbers here.")}
+                    placeholder="PK54NBPK0123... or A/C No"
+                    onFocus={() => onFocusHint("Bank IBAN / Account Number", "Type international IBAN or general checking account numbers here.")}
                     onBlur={onBlurHint}
                   />
                 </div>
@@ -663,14 +663,14 @@ export default function InvoiceSheet({
 
               {data.visibleSections.bankSwift && (
                 <div className="flex justify-between items-center text-[11px] text-slate-500">
-                  <span>SWIFT:</span>
+                  <span>Raast ID:</span>
                   <input
                     type="text"
                     value={data.bankSwift}
                     onChange={(e) => handlePropChange("bankSwift", e.target.value)}
                     className="text-right font-mono text-slate-700 bg-transparent border-none outline-none max-w-[150px]"
-                    placeholder="BINKNPKAXXX"
-                    onFocus={() => onFocusHint("Bank BIC / SWIFT Code", "SWIFT routing code identifier for wiring wire-transfers overseas.")}
+                    placeholder="Raast ID or SWIFT"
+                    onFocus={() => onFocusHint("Raast ID / SWIFT BIC Code", "Enter your Raast mobile payment ID, or SWIFT/BIC code for clearing wire transfers.")}
                     onBlur={onBlurHint}
                   />
                 </div>

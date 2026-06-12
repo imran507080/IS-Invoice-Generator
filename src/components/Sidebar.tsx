@@ -139,6 +139,32 @@ export default function Sidebar({
               step="any"
             />
           </div>
+
+          {/* Invoice Format Selector */}
+          <div className="flex flex-col gap-1 col-span-2 mt-1">
+            <label className="text-[11px] font-medium text-slate-400">Invoice Format</label>
+            <div className="flex gap-2">
+              <select
+                value={data.invoiceFormat || "INV-YYYYMMDD-1001"}
+                onChange={(e) => handleAdjustmentChange("invoiceFormat", e.target.value)}
+                className="bg-[#161f30] border border-slate-800 hover:border-slate-700 focus:border-blue-500 rounded px-3 py-1.5 text-xs text-slate-200 outline-none cursor-pointer flex-1"
+              >
+                <option value="INV-YYYYMMDD-1001">INV-YYYYMMDD-1001</option>
+                <option value="INV-YYYY-1001">INV-YYYY-1001</option>
+                <option value="INV-0001">INV-0001</option>
+                <option value="INV-1001">INV-1001</option>
+                <option value="INV-MMDD-1001">INV-MMDD-1001</option>
+              </select>
+              <input
+                type="text"
+                value={data.seqCounter || "1001"}
+                onChange={(e) => handleAdjustmentChange("seqCounter", e.target.value)}
+                placeholder="1001"
+                className="bg-[#161f30] border border-slate-800 hover:border-slate-700 focus:border-blue-500 rounded px-2.5 py-1.5 text-xs text-slate-200 outline-none w-20 text-center font-mono"
+                title="Counter Sequence Suffix"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -295,7 +321,7 @@ export default function Sidebar({
                 onChange={() => handleVisibleSectionToggle("acNumber")}
                 className="rounded accent-blue-500 w-3.5 h-3.5 bg-slate-800 border-slate-700"
               />
-              <span>A/C Number</span>
+              <span>IBAN</span>
             </label>
 
             <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white transition-colors">
@@ -378,7 +404,7 @@ export default function Sidebar({
                 onChange={() => handleVisibleSectionToggle("bankSwift")}
                 className="rounded accent-blue-500 w-3.5 h-3.5 bg-slate-800 border-slate-700"
               />
-              <span>Bank SWIFT</span>
+              <span>Raast ID</span>
             </label>
 
             <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white transition-colors">

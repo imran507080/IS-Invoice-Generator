@@ -9,7 +9,7 @@ import { InvoiceData } from "./types";
 export const DEFAULT_LOGO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="%232563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 10 4 4 4-4"/></svg>`;
 
 export const DEFAULT_INVOICE_DATA: InvoiceData = {
-  invoiceNo: "INV0001",
+  invoiceNo: "INV-20260611-1001",
   date: "2026-06-11",
   dueDate: "2026-06-18",
   paymentTerms: "Net 7",
@@ -56,6 +56,9 @@ export const DEFAULT_INVOICE_DATA: InvoiceData = {
   shipping: 5,
   
   themeColor: "#1e3a8a", // Dark navy blue matching the screenshot
+  
+  invoiceFormat: "INV-YYYYMMDD-1001",
+  seqCounter: "1001",
   
   visibleSections: {
     showLogo: true,

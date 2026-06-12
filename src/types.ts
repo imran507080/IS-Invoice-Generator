@@ -70,6 +70,10 @@ export interface InvoiceData {
   // Accent color hex
   themeColor: string;
   
+  // Format info
+  invoiceFormat?: string;
+  seqCounter?: string;
+  
   // Toggles
   visibleSections: VisibleSections;
 }

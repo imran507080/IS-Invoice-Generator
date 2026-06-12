@@ -89,6 +89,36 @@ export default function App() {
 
   // Change active invoice data updates
   const handleInvoiceChange = (updated: InvoiceData) => {
+    // Automatically keep invoiceNo in sync with date and format adjustments
+    const oldDate = invoiceData.date;
+    const oldFormat = invoiceData.invoiceFormat || "INV-YYYYMMDD-1001";
+    const oldSeq = invoiceData.seqCounter || "1001";
+    
+    const newDate = updated.date;
+    const newFormat = updated.invoiceFormat || "INV-YYYYMMDD-1001";
+    const newSeq = updated.seqCounter || "1001";
+    
+    if (oldDate !== newDate || oldFormat !== newFormat || oldSeq !== newSeq) {
+      const parts = (newDate || "2026-06-11").split('-');
+      const yyyy = parts[0] || "2026";
+      const mm = parts[1] || "06";
+      const dd = parts[2] || "11";
+      
+      let formattedNo = newFormat;
+      formattedNo = formattedNo.replace(/YYYY/g, yyyy);
+      formattedNo = formattedNo.replace(/MM/g, mm);
+      formattedNo = formattedNo.replace(/DD/g, dd);
+      
+      if (formattedNo.includes("1001")) {
+        formattedNo = formattedNo.replace("1001", newSeq);
+      } else if (formattedNo.includes("0001")) {
+        const paddedVal = String(parseInt(newSeq) || 1).padStart(4, '0');
+        formattedNo = formattedNo.replace("0001", paddedVal);
+      }
+      
+      updated.invoiceNo = formattedNo;
+    }
+    
     setInvoiceData(updated);
   };
 
