@@ -1,0 +1,115 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+@import "tailwindcss";
+
+/* Smooth keyframes for custom toast alert entry */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, 15px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom hide handles for chrome browser spinners on numeric bounds inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* PREMIUM PRINT RULES TO RENDER HIGH-FIDELITY PDF AT A4 RESOLUTION */
+@media print {
+  html, body {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Completely hide sidebar, title toolbars, drop zones, delete icons and hover controls */
+  .no-print {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Reset layout sheet to cover full paper width without page offsets */
+  .print-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    min-height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  /* Hide input background shades, borders, outlines, focus grids */
+  input, textarea, select {
+    border: none !important;
+    border-bottom: 1px transparent !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    padding: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    resize: none !important;
+    color: #0f172a !important;
+    font-weight:inherit !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+  }
+
+  /* Override helper shadows */
+  .no-print-border {
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .no-print-bg {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Keep row backgrounds in itemized table elements or reset cleanly */
+  .no-print-hover-reset:hover {
+    background-color: transparent !important;
+  }
+
+  /* Table alignments */
+  tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+  }
+
+  /* Ensure web fonts render properly */
+  * {
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+}

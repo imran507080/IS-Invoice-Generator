@@ -1,0 +1,6 @@
+{
+  "name": "KB Invoice Generator",
+  "description": "An interactive, highly-customizable desktop-grade invoice designer and generator with live templates, printable layout, and real-time adjustments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
